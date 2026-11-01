@@ -1,0 +1,796 @@
+<!-- Captain Vape Alexandria - Full Clean Interactive Web Application -->
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Captain Vape Alexandria | متجر الفيب في الإسكندرية</title>
+    <meta name="description" content="متجر Captain Vape الإسكندرية: بود، بود مود، مودات، وأجهزة مرة واحدة وسوائل نكهات من أشهر الماركات الأصلية مع توصيل سريع والدفع عبر إنستا باي أو عند الاستلام.">
+    
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        :root {
+            /* Neon Purple Background with 60% Visible Opacity / Glow */
+            --background-color: #0f031b;
+            --surface-color: rgba(26, 6, 46, 0.6);
+            --surface-card: rgba(37, 9, 66, 0.6);
+            --border-color: rgba(188, 19, 254, 0.4);
+            --primary-color: #bc13fe;
+            --primary-hover: #9c0cd8;
+            --secondary-color: #ff007f;
+            --accent-color: #00f0ff;
+            --text-color: #f8f6ff;
+            --text-muted: #c2a8e8;
+            --font-body: 'Cairo', sans-serif;
+            --radius-lg: 16px;
+        }
+
+        body {
+            background-color: var(--background-color);
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(188, 19, 254, 0.25) 0%, transparent 60%),
+                radial-gradient(circle at 80% 50%, rgba(255, 0, 127, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 20% 80%, rgba(0, 240, 255, 0.15) 0%, transparent 50%);
+            background-attachment: fixed;
+            color: var(--text-color);
+            font-family: var(--font-body);
+        }
+
+        .cv-container {
+            max-width: 1280px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        .cv-header {
+            background-color: rgba(15, 3, 27, 0.75);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 4px 20px rgba(188, 19, 254, 0.2);
+        }
+
+        .cv-card {
+            background-color: var(--surface-card);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .cv-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 25px rgba(188, 19, 254, 0.4);
+        }
+
+        .cv-btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), #8a00e6);
+            color: #ffffff;
+            font-weight: 800;
+            padding: 0.65rem 1.25rem;
+            border-radius: 10px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            box-shadow: 0 0 12px rgba(188, 19, 254, 0.4);
+        }
+
+        .cv-btn-primary:hover {
+            opacity: 0.95;
+            transform: scale(1.02);
+            box-shadow: 0 0 20px rgba(188, 19, 254, 0.7);
+        }
+
+        .cv-btn-ghost {
+            background-color: rgba(26, 6, 46, 0.5);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            font-weight: 700;
+            padding: 0.65rem 1.25rem;
+            border-radius: 10px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .cv-btn-ghost:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            box-shadow: 0 0 10px rgba(188, 19, 254, 0.3);
+        }
+
+        .cv-tab {
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            border: 1px solid var(--border-color);
+            background-color: var(--surface-color);
+            backdrop-filter: blur(8px);
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .cv-tab.is-active, .cv-tab:hover {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 10px rgba(188, 19, 254, 0.5);
+        }
+
+        .cv-kicker {
+            color: var(--accent-color);
+            font-size: 0.85rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: inline-block;
+            background: rgba(0, 240, 255, 0.1);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            border: 1px solid rgba(0, 240, 255, 0.25);
+        }
+
+        .cv-rule {
+            height: 3px;
+            width: 50px;
+            background: var(--primary-color);
+            border-radius: 2px;
+            box-shadow: 0 0 8px var(--primary-color);
+        }
+
+        .neon-grid {
+            background-image: linear-gradient(to right, rgba(188, 19, 254, 0.1) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(188, 19, 254, 0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        /* Modal Overlay */
+        .modal-backdrop {
+            background: rgba(10, 2, 18, 0.85);
+            backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- Header Navigation -->
+    <header class="cv-header sticky top-0 z-50">
+        <nav class="cv-container" aria-label="القائمة الرئيسية">
+            <div class="flex min-h-16 items-center justify-between gap-2 py-2">
+                <!-- Logo -->
+                <a href="#hero" class="flex items-center gap-2 sm:gap-3">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-purple-600 via-pink-500 to-cyan-400 p-0.5 flex items-center justify-center shadow-[0_0_12px_rgba(188,19,254,0.6)]">
+                        <img alt="شعار Captain Vape الإسكندرية" class="h-full w-full rounded-full object-cover" src="https://files.cdn-files-a.com/uploads/12502958/800_6add37f79e965.jpg?format=avif" onerror="this.src='https://placehold.co/100x100/1a062e/bc13fe?text=Vape'">
+                    </div>
+                    <span class="leading-tight">
+                        <span class="block text-base sm:text-lg font-black text-white tracking-wide">Captain Vape</span>
+                        <span class="block text-[0.55rem] sm:text-[0.6rem] font-bold tracking-[0.2em] text-[var(--accent-color)]">ALEXANDRIA</span>
+                    </span>
+                </a>
+
+                <!-- Desktop Nav -->
+                <div class="hidden items-center gap-1 text-sm font-bold lg:flex">
+                    <a class="px-3 py-2 text-white hover:text-[var(--primary-color)] transition" href="#hero">الرئيسية</a>
+                    <a class="px-3 py-2 text-white hover:text-[var(--primary-color)] transition" href="#devices">الأجهزة والبودات</a>
+                    <a class="px-3 py-2 text-white hover:text-[var(--primary-color)] transition" href="#flavors">النكهات</a>
+                    <a class="px-3 py-2 text-white hover:text-[var(--primary-color)] transition" href="#brands">الماركات</a>
+                    <a class="px-3 py-2 text-white hover:text-[var(--primary-color)] transition" href="#features">من نحن</a>
+                    <a class="px-3 py-2 text-white hover:text-[var(--primary-color)] transition" href="#faq">الأسئلة الشائعة</a>
+                </div>
+
+                <!-- Actions -->
+                <div class="flex items-center gap-2 sm:gap-3">
+                    <!-- Cart Button -->
+                    <button id="openCartBtn" onclick="toggleCartModal()" class="relative inline-flex h-9 sm:h-10 items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-4 rounded-xl border border-[var(--border-color)] bg-[var(--surface-color)] text-white hover:border-[var(--primary-color)] transition">
+                        <i class="fa-solid fa-cart-shopping text-sm sm:text-base text-[var(--primary-color)]"></i>
+                        <span class="hidden sm:inline font-bold text-xs">سلة الطلبات</span>
+                        <span id="cartBadge" class="inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-[var(--primary-color)] rounded-full shadow-[0_0_8px_rgba(188,19,254,0.8)]">0</span>
+                    </button>
+
+                    <a href="#contact" class="cv-btn-primary hidden sm:inline-flex text-xs">تواصل معنا</a>
+
+                    <!-- Mobile Menu Button -->
+                    <button id="mobileMenuToggle" onclick="toggleMobileMenu()" type="button" class="inline-flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-xl border border-[var(--border-color)] bg-[var(--surface-color)] text-white lg:hidden">
+                        <i class="fa-solid fa-bars text-base sm:text-lg"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="hidden border-t border-[var(--border-color)] pb-4 pt-3 lg:hidden">
+                <div class="flex flex-col gap-1 font-bold text-sm">
+                    <a class="px-3 py-2 rounded-lg hover:bg-[var(--surface-color)]" href="#hero" onclick="toggleMobileMenu()">الرئيسية</a>
+                    <a class="px-3 py-2 rounded-lg hover:bg-[var(--surface-color)]" href="#devices" onclick="toggleMobileMenu()">الأجهزة والبودات</a>
+                    <a class="px-3 py-2 rounded-lg hover:bg-[var(--surface-color)]" href="#flavors" onclick="toggleMobileMenu()">النكهات</a>
+                    <a class="px-3 py-2 rounded-lg hover:bg-[var(--surface-color)]" href="#brands" onclick="toggleMobileMenu()">الماركات</a>
+                    <a class="px-3 py-2 rounded-lg hover:bg-[var(--surface-color)]" href="#features" onclick="toggleMobileMenu()">من نحن</a>
+                    <a class="px-3 py-2 rounded-lg hover:bg-[var(--surface-color)]" href="#faq" onclick="toggleMobileMenu()">الأسئلة الشائعة</a>
+                    <a class="px-3 py-2 rounded-lg hover:bg-[var(--surface-color)] text-[var(--primary-color)]" href="#contact" onclick="toggleMobileMenu()">الاستفسار والطلب الفوري</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main id="top" class="flex-grow">
+        <!-- Hero Section -->
+        <section id="hero" class="relative overflow-hidden py-12 lg:py-20">
+            <div class="absolute inset-0 neon-grid opacity-60 pointer-events-none"></div>
+            <div class="cv-container relative grid items-center gap-8 lg:grid-cols-2">
+                <div class="text-center lg:text-right">
+                    <span class="cv-kicker">متجر الفيب الأول في الإسكندرية</span>
+                    <h1 class="mt-4 text-2xl font-black leading-tight text-white sm:text-4xl lg:text-5xl">
+                        أفضل أجهزة ونكهات الفيب الأصلي <br class="hidden sm:inline">
+                        <span class="text-[var(--primary-color)] drop-shadow-[0_0_12px_rgba(188,19,254,0.5)]">بأعلى جودة وأفضل سعر</span>
+                    </h1>
+                    <p class="mt-4 text-xs sm:text-sm leading-relaxed text-[var(--text-muted)] max-w-xl mx-auto lg:mx-0">
+                        نوفر لك تشكيلة كاملة من أجهزة البود، البود مود، المودات المتقدمة، الديسپوسيبل، وأفضل نكهات السائل الفاخرة مع خدمة التوصيل الفوري والدفع عند الاستلام أو عبر إنستا باي (InstaPay).
+                    </p>
+                    <div class="mt-6 flex flex-wrap justify-center lg:justify-start gap-3">
+                        <a href="#devices" class="cv-btn-primary text-xs sm:text-sm">تصفح الأجهزة</a>
+                        <a href="#flavors" class="cv-btn-ghost text-xs sm:text-sm">تصفح النكهات</a>
+                    </div>
+                    <div class="mt-8 grid grid-cols-3 gap-2 sm:gap-4 border-t border-[var(--border-color)] pt-6 text-center">
+                        <div>
+                            <span class="block text-xl sm:text-2xl font-black text-[var(--accent-color)]">+50</span>
+                            <span class="text-[0.65rem] sm:text-xs text-[var(--text-muted)] font-bold">منتج أصلي</span>
+                        </div>
+                        <div>
+                            <span class="block text-xl sm:text-2xl font-black text-[var(--accent-color)]">100%</span>
+                            <span class="text-[0.65rem] sm:text-xs text-[var(--text-muted)] font-bold">أوريجينال مضمون</span>
+                        </div>
+                        <div>
+                            <span class="block text-xl sm:text-2xl font-black text-[var(--accent-color)]">فوري</span>
+                            <span class="text-[0.65rem] sm:text-xs text-[var(--text-muted)] font-bold">توصيل الإسكندرية</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative flex justify-center">
+                    <div class="relative w-full max-w-sm sm:max-w-md overflow-hidden rounded-2xl border border-[var(--border-color)] shadow-[0_0_30px_rgba(188,19,254,0.35)]">
+                        <img alt="Captain Vape Alexandria Store" class="w-full h-64 sm:h-80 lg:h-96 object-cover" src="https://files.cdn-files-a.com/uploads/12502958/800_un-6add37883ded4.jpg?format=avif" onerror="this.src='https://placehold.co/600x600/1a062e/bc13fe?text=Captain+Vape'">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Devices Section -->
+        <section id="devices" class="py-12 sm:py-16">
+            <div class="cv-container">
+                <div class="max-w-2xl text-center sm:text-right">
+                    <span class="cv-kicker">الأجهزة والمنتجات</span>
+                    <h2 class="mt-3 text-xl sm:text-3xl font-black text-white">أجهزة الفيب المتطورة</h2>
+                    <div class="cv-rule mt-3 mx-auto sm:mx-0"></div>
+                    <p class="mt-3 text-xs sm:text-sm text-[var(--text-muted)]">اختر قسم المنتجات المفضل واضغط "أضف للطلب" لإضافة الجهاز مباشرة لسلتك.</p>
+                </div>
+
+                <!-- Mobile Scrollable Tabs -->
+                <div id="deviceCategoryTabs" class="mt-6 flex overflow-x-auto pb-2 gap-2 scrollbar-none">
+                    <button type="button" class="cv-tab is-active" onclick="filterCategory('all', this)">الكل</button>
+                    <button type="button" class="cv-tab" onclick="filterCategory('pod', this)">أنظمة البود</button>
+                    <button type="button" class="cv-tab" onclick="filterCategory('podmod', this)">بود مود</button>
+                    <button type="button" class="cv-tab" onclick="filterCategory('mod', this)">المودات المتقدمة</button>
+                    <button type="button" class="cv-tab" onclick="filterCategory('disposable', this)">ديسبوسيبل (مرة واحدة)</button>
+                </div>
+
+                <!-- Product Grid Responsive Layout -->
+                <div id="deviceGrid" class="mt-8 grid gap-4 grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                    <!-- Products rendered dynamically by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Flavors Showcase Section (Categorized 40 Flavors) -->
+        <section id="flavors" class="py-12 sm:py-16 bg-[var(--surface-color)] border-y border-[var(--border-color)]">
+            <div class="cv-container">
+                <div class="max-w-2xl text-center sm:text-right">
+                    <span class="cv-kicker">النكهات</span>
+                    <h2 class="mt-3 text-xl sm:text-3xl font-black text-white">النكهات</h2>
+                    <div class="cv-rule mt-3 mx-auto sm:mx-0"></div>
+                    <p class="mt-3 text-xs sm:text-sm text-[var(--text-muted)]">تصفح أقسام النكهات واضغط "إضافة هذه النكهة" لطلب نكهتك المفضلة بصيغة Salt Nic أو Freebase.</p>
+                </div>
+
+                <div id="flavorSections" class="mt-10 space-y-12">
+                    <!-- Dynamic Flavor Categories will load here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Brands Section -->
+        <section id="brands" class="py-12 sm:py-16">
+            <div class="cv-container text-center">
+                <span class="cv-kicker">الماركات العالمية</span>
+                <h2 class="mt-3 text-xl sm:text-3xl font-black text-white">أشهر الماركات الأصلية المتاحة</h2>
+                <div class="cv-rule mx-auto mt-3"></div>
+                <div class="mt-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
+                    <div class="p-3 sm:p-4 bg-[var(--surface-card)] border border-[var(--border-color)] rounded-xl font-black text-base sm:text-lg text-white flex items-center justify-center">VOOPOO</div>
+                    <div class="p-3 sm:p-4 bg-[var(--surface-card)] border border-[var(--border-color)] rounded-xl font-black text-base sm:text-lg text-white flex items-center justify-center">VAPORESSO</div>
+                    <div class="p-3 sm:p-4 bg-[var(--surface-card)] border border-[var(--border-color)] rounded-xl font-black text-base sm:text-lg text-white flex items-center justify-center">GEEKVAPE</div>
+                    <div class="p-3 sm:p-4 bg-[var(--surface-card)] border border-[var(--border-color)] rounded-xl font-black text-base sm:text-lg text-white flex items-center justify-center">SMOK</div>
+                    <div class="p-3 sm:p-4 bg-[var(--surface-card)] border border-[var(--border-color)] rounded-xl font-black text-base sm:text-lg text-white flex items-center justify-center">OXVA</div>
+                    <div class="p-3 sm:p-4 bg-[var(--surface-card)] border border-[var(--border-color)] rounded-xl font-black text-base sm:text-lg text-white flex items-center justify-center">UWELL</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features / Who We Are Section -->
+        <section id="features" class="py-12 sm:py-16 bg-[var(--surface-color)] border-t border-[var(--border-color)]">
+            <div class="cv-container">
+                <div class="text-center max-w-2xl mx-auto">
+                    <span class="cv-kicker">من نحن</span>
+                    <h2 class="mt-3 text-xl sm:text-3xl font-black text-white">متجر Captain Vape الإسكندرية</h2>
+                    <div class="cv-rule mx-auto mt-3"></div>
+                    <p class="mt-3 text-xs sm:text-sm text-[var(--text-muted)]">نحن المتجر المعتمد والأول في الإسكندرية لتوفير أجهزة الفيب الأصلية ومستلزماتها ونكهات السائل الفاخرة بأسعار تنافسية وخدمة توصيل فورية.</p>
+                </div>
+                <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                    <div class="p-5 bg-[var(--surface-card)] border border-[var(--border-color)] rounded-2xl">
+                        <i class="fa-solid fa-shield-halved text-2xl sm:text-3xl text-[var(--accent-color)] mb-3"></i>
+                        <h3 class="text-base sm:text-lg font-bold text-white">منتجات أصلية 100%</h3>
+                        <p class="mt-2 text-xs text-[var(--text-muted)]">جميع الأجهزة والسوائل مضمونة مع كود التحقق من المصنع مباشرة.</p>
+                    </div>
+                    <div class="p-5 bg-[var(--surface-card)] border border-[var(--border-color)] rounded-2xl">
+                        <i class="fa-solid fa-truck-fast text-2xl sm:text-3xl text-[var(--accent-color)] mb-3"></i>
+                        <h3 class="text-base sm:text-lg font-bold text-white">توصيل سريع بالإسكندرية</h3>
+                        <p class="mt-2 text-xs text-[var(--text-muted)]">نوصل طلبك لجميع أحياء ومناطق الإسكندرية في أسرع وقت ممكن.</p>
+                    </div>
+                    <div class="p-5 bg-[var(--surface-card)] border border-[var(--border-color)] rounded-2xl">
+                        <i class="fa-solid fa-credit-card text-2xl sm:text-3xl text-[var(--accent-color)] mb-3"></i>
+                        <h3 class="text-base sm:text-lg font-bold text-white">طرق دفع متعددة</h3>
+                        <p class="mt-2 text-xs text-[var(--text-muted)]">ادفع بسهولة عند الاستلام كاش أو مباشرة عبر تطبيق إنستا باي (InstaPay).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="py-12 sm:py-16">
+            <div class="cv-container max-w-4xl">
+                <div class="text-center mb-8">
+                    <span class="cv-kicker">الأسئلة الشائعة</span>
+                    <h2 class="mt-3 text-xl sm:text-3xl font-black text-white">إجابات الاستفسارات</h2>
+                    <div class="cv-rule mx-auto mt-3"></div>
+                </div>
+                <div class="space-y-3">
+                    <details class="p-4 bg-[var(--surface-card)] border border-[var(--border-color)] rounded-xl cursor-pointer">
+                        <summary class="font-bold text-sm sm:text-base text-white">كيف اختار التركيز المناسب للنكهة؟</summary>
+                        <p class="mt-2 text-xs sm:text-sm text-[var(--text-muted)]">إذا كنت تستخدم جهاز سحبة سيجارة (Pod System) اختر النكهة بصيغة Salt Nicotine (25mg/50mg). أما إذا كنت تستخدم مود ودخان كثيف (Mod) اختر Freebase (3mg/6mg).</p>
+                    </details>
+                    <details class="p-4 bg-[var(--surface-card)] border border-[var(--border-color)] rounded-xl cursor-pointer">
+                        <summary class="font-bold text-sm sm:text-base text-white">كيف يمكنني الدفع؟</summary>
+                        <p class="mt-2 text-xs sm:text-sm text-[var(--text-muted)]">يمكنك الدفع كاش عند استلام الطلب، أو التحويل الفوري عبر إنستا باي (InstaPay) على رقم الحساب الموضح في السلة.</p>
+                    </details>
+                    <details class="p-4 bg-[var(--surface-card)] border border-[var(--border-color)] rounded-xl cursor-pointer">
+                        <summary class="font-bold text-sm sm:text-base text-white">هل المنتجات أصلية؟</summary>
+                        <p class="mt-2 text-xs sm:text-sm text-[var(--text-muted)]">نعم، جميع منتجاتنا مع كود التحقق الأصلي (Scratch Code) من المصنع.</p>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-12 sm:py-16 bg-[var(--surface-color)] border-t border-[var(--border-color)]">
+            <div class="cv-container max-w-3xl text-center">
+                <span class="cv-kicker">تواصل مباشر</span>
+                <h2 class="mt-3 text-xl sm:text-3xl font-black text-white">عندك استفسار أو محتاج مساعدة؟</h2>
+                <p class="mt-2 text-xs sm:text-sm text-[var(--text-muted)]">فريق Captain Vape جاهز لمساعدتك في اختيار الجهاز أو النكهة المناسبة لطريقة سحبك.</p>
+                <div class="mt-6 flex flex-wrap justify-center gap-3">
+                    <a href="https://wa.me/201200000000" target="_blank" class="cv-btn-primary bg-emerald-600 hover:bg-emerald-500 text-white border-none text-xs sm:text-sm"><i class="fa-brands fa-whatsapp text-base"></i>تحدث معنا واتساب</a>
+                    <a href="tel:01200000000" class="cv-btn-ghost text-xs sm:text-sm"><i class="fa-solid fa-phone"></i>اتصل بنا مباشر</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#08010f] py-6 border-t border-[var(--border-color)] text-center text-xs text-[var(--text-muted)]">
+        <div class="cv-container">
+            <p>جميع الحقوق محفوظة © Captain Vape Alexandria 2026</p>
+            <p class="mt-1 text-[0.65rem] text-purple-300/60">متجر الفيب الأصلي والأول في الإسكندرية</p>
+        </div>
+    </footer>
+
+    <!-- CART & CHECKOUT MODAL -->
+    <div id="cartModal" class="fixed inset-0 z-50 hidden modal-backdrop flex items-center justify-center p-3 sm:p-4">
+        <div class="bg-[var(--surface-card)] border border-[var(--border-color)] w-full max-w-lg rounded-2xl p-4 sm:p-6 relative max-h-[90vh] overflow-y-auto">
+            <button onclick="toggleCartModal()" class="absolute left-4 top-4 text-gray-400 hover:text-white text-lg font-bold">✕</button>
+            <h3 class="text-lg sm:text-xl font-black text-white flex items-center gap-2">
+                <i class="fa-solid fa-cart-shopping text-[var(--primary-color)]"></i>
+                سلة الطلبات الشاملة
+            </h3>
+            
+            <div id="cartItemsContainer" class="mt-4 space-y-3 divide-y divide-[var(--border-color)]">
+                <!-- Items loaded by JS -->
+            </div>
+
+            <!-- Cart Total Summary -->
+            <div class="mt-4 border-t border-[var(--border-color)] pt-3">
+                <div class="flex justify-between items-center text-sm sm:text-base font-bold text-white">
+                    <span>إجمالي الطلب:</span>
+                    <span id="cartTotalPrice" class="text-lg sm:text-xl font-black text-[var(--accent-color)]">0 ج.م</span>
+                </div>
+            </div>
+
+            <!-- Checkout Form -->
+            <form id="checkoutForm" onsubmit="handleCheckout(event)" class="mt-4 space-y-3 border-t border-[var(--border-color)] pt-3">
+                <h4 class="font-bold text-white text-xs sm:text-sm">بيانات التوصيل والشحن:</h4>
+                <div class="grid sm:grid-cols-2 gap-2 sm:gap-3">
+                    <input type="text" id="custName" required placeholder="الاسم بالكامل" class="w-full p-2.5 rounded-lg bg-[var(--surface-color)] border border-[var(--border-color)] text-white text-xs sm:text-sm focus:border-[var(--primary-color)] outline-none">
+                    <input type="tel" id="custPhone" required placeholder="رقم الموبايل (واتساب)" class="w-full p-2.5 rounded-lg bg-[var(--surface-color)] border border-[var(--border-color)] text-white text-xs sm:text-sm focus:border-[var(--primary-color)] outline-none">
+                </div>
+                <input type="text" id="custAddress" required placeholder="العنوان بالتفصيل في الإسكندرية" class="w-full p-2.5 rounded-lg bg-[var(--surface-color)] border border-[var(--border-color)] text-white text-xs sm:text-sm focus:border-[var(--primary-color)] outline-none">
+                
+                <!-- Payment Methods -->
+                <div>
+                    <label class="block font-bold text-[0.7rem] sm:text-xs text-white mb-1.5">طريقة الدفع الفوري:</label>
+                    <div class="grid grid-cols-2 gap-2">
+                        <label class="flex items-center gap-2 p-2.5 border border-[var(--border-color)] rounded-lg bg-[var(--surface-color)] cursor-pointer hover:border-[var(--primary-color)]">
+                            <input type="radio" name="paymentMethod" value="cod" checked onchange="toggleInstaPayInfo(false)">
+                            <span class="text-[0.7rem] sm:text-xs font-bold text-white">الدفع عند الاستلام</span>
+                        </label>
+                        <label class="flex items-center gap-2 p-2.5 border border-[var(--border-color)] rounded-lg bg-[var(--surface-color)] cursor-pointer hover:border-[var(--primary-color)]">
+                            <input type="radio" name="paymentMethod" value="instapay" onchange="toggleInstaPayInfo(true)">
+                            <span class="text-[0.7rem] sm:text-xs font-bold text-white">إنستا باي (InstaPay)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- InstaPay Instructions -->
+                <div id="instapayDetails" class="hidden p-3 rounded-xl border border-purple-500/30 bg-purple-950/30 text-[0.7rem] sm:text-xs leading-relaxed text-purple-200 space-y-1">
+                    <p class="font-bold text-purple-300">بيانات التحويل عبر تطبيق InstaPay:</p>
+                    <p>عنوان الدفع (IPA): <span class="font-mono font-bold text-white select-all">captainvape@instapay</span></p>
+                    <p>أو رقم الموبايل: <span class="font-mono font-bold text-white select-all">01200000000</span></p>
+                    <p class="text-[0.65rem] text-gray-300">برجاء إرفاق صورة التحويل أو ذكر الاسم في تفاصيل المعاملة عند التأكيد.</p>
+                </div>
+
+                <button type="submit" class="cv-btn-primary w-full text-sm py-2.5 sm:py-3 mt-3">
+                    تأكيد الطلب الآن
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Application Script Logic -->
+    <script>
+        // Catalog Data
+        const productsData = [
+            { id: '1', name: 'Aroma King Dark Knight', brand: 'Aroma King', category: 'disposable', price: 550, desc: 'سحبات كتير، وشاشة بتوريك البطارية والسائل.', img: 'https://files.cdn-files-a.com/uploads/12502958/800_6add49e34535c.jpg?format=avif' },
+            { id: '2', name: 'Waka SoPro PA10000', brand: 'Waka', category: 'disposable', price: 500, desc: 'فيه وضعية Boost بتخلي الطعم والبخار أقوى.', img: 'https://files.cdn-files-a.com/uploads/12502958/800_6add49e2ca7c0.jpg?format=avif' },
+            { id: '3', name: 'Lost Mary OS5000', brand: 'Lost Mary', category: 'disposable', price: 400, desc: 'حجمه صغير ونكهاته قوية وفاكهية.', img: 'https://files.cdn-files-a.com/uploads/12502958/800_6add49e25ce80.jpg?format=avif' },
+            { id: '4', name: 'Elf Bar BC10000', brand: 'Elf Bar', category: 'disposable', price: 450, desc: 'نكهات كتير وسحبة مريحة وتقعد معاك فترة.', img: 'https://files.cdn-files-a.com/uploads/12502958/800_6add49dc16d77.jpg?format=avif' },
+            { id: '5', name: 'Smok Morph 3', brand: 'Smok', category: 'mod', price: 2900, desc: 'قوته عالية لعشاق السحب المفتوح.', img: 'https://files.cdn-files-a.com/uploads/12502958/800_6add49e1f1c8a.jpg?format=avif' },
+            { id: '6', name: 'Lost Vape Centaurus M200', brand: 'Lost Vape', category: 'mod', price: 3400, desc: 'شكله فخم، وفيه قرص بتتحكم بيه في القوة.', img: 'https://files.cdn-files-a.com/uploads/12502958/800_6add49e110bc7.jpg?format=avif' },
+            { id: '7', name: 'Voopoo Drag 4', brand: 'Voopoo', category: 'mod', price: 3000, desc: 'مود كلاسيكي بيستجيب بسرعة على طول.', img: 'https://files.cdn-files-a.com/uploads/12502958/800_6add49e0328c6.jpg?format=avif' },
+            { id: '8', name: 'Vaporesso Gen 200', brand: 'Vaporesso', category: 'mod', price: 2600, desc: 'خفيف الوزن وقوته توصل 220 واط.', img: 'https://files.cdn-files-a.com/uploads/12502958/800_6add49e097a84.jpg?format=avif' },
+            { id: '9', name: 'Geekvape Aegis Legend 2', brand: 'Geekvape', category: 'mod', price: 2850, desc: 'من أقوى المودات لبخار كتير وبطاريتين.', img: 'https://files.cdn-files-a.com/uploads/12502958/800_6add49db97e4c.jpg?format=avif' },
+            { id: '10', name: 'Smok IPX 80', brand: 'Smok', category: 'podmod', price: 1500, desc: 'متين ومقاوم للماء، وبطارية داخلية 3000mAh.', img: 'https://files.cdn-files-a.com/uploads/12502958/800_6add49e183582.jpg?format=avif' },
+            { id: '11', name: 'Vaporesso Luxe XR Max', brand: 'Vaporesso', category: 'podmod', price: 1800, desc: 'بطارية كبيرة 3200mAh وقوة توصل 80 واط.', img: 'https://files.cdn-files-a.com/uploads/12502958/800_6add49dfab484.jpg?format=avif' },
+            { id: '12', name: 'Geekvape Aegis Boost 2 (B60)', brand: 'Geekvape', category: 'podmod', price: 1750, desc: 'مقاوم للماء والأتربة والصدمات، وبطارية ممتازة.', img: 'https://files.cdn-files-a.com/uploads/12502958/800_6add49de66f01.jpg?format=avif' },
+            { id: '13', name: 'Voopoo Drag S Pro', brand: 'Voopoo', category: 'podmod', price: 1600, desc: 'جلد ومعدن، وأداء قوي وتقدر تتحكم فيه براحتك.', img: 'https://files.cdn-files-a.com/uploads/12502958/800_6add49dec989a.jpg?format=avif' },
+            { id: '14', name: 'Nevoks Feelin A1', brand: 'Nevoks', category: 'pod', price: 800, desc: 'أداء متوازن وبطارية قوية بسعر مناسب.', img: 'https://files.cdn-files-a.com/uploads/12502958/800_6add49df45515.jpg?format=avif' },
+            { id: '15', name: 'Smok Nord 5', brand: 'Smok', category: 'pod', price: 1150, desc: 'حجمه صغير بس قوته حلوة لأي استخدام.', img: 'https://files.cdn-files-a.com/uploads/12502958/800_6add49ddd97d5.jpg?format=avif' },
+            { id: '16', name: 'OXVA Xlim Pro', brand: 'OXVA', category: 'pod', price: 1200, desc: 'قوة توصل 30 واط، شاشة ملوّنة، وبطارية تعيش.', img: 'https://files.cdn-files-a.com/uploads/12502958/800_6add49db38c3d.jpg?format=avif' },
+            { id: '17', name: 'Voopoo Argus Pod', brand: 'Voopoo', category: 'pod', price: 1000, desc: 'شكله أنيق، وتقدر تظبط فتحة الهواء زي ما تحب.', img: 'https://files.cdn-files-a.com/uploads/12502958/800_6add49dd7a4e1.jpg?format=avif' },
+            { id: '18', name: 'Uwell Caliburn G3', brand: 'Uwell', category: 'pod', price: 1050, desc: 'شاشة صغيرة وتحكم في القوة، وطعم واضح جداً.', img: 'https://files.cdn-files-a.com/uploads/12502958/800_6add49dce119d.jpg?format=avif' },
+            { id: '19', name: 'Vaporesso XROS 4', brand: 'Vaporesso', category: 'pod', price: 1100, desc: 'جهاز مشهور ومعتمد، وكويلاته بتدي طعم قوي.', img: 'https://files.cdn-files-a.com/uploads/12502958/800_6add49dac4738.jpg?format=avif' },
+            { id: '20', name: 'Geekvape Wenax M1', brand: 'Geekvape', category: 'pod', price: 750, desc: 'قلم خفيف وشكله حلو، وسحبته زي السيجارة.', img: 'https://files.cdn-files-a.com/uploads/12502958/800_6add49dc7bb01.jpg?format=avif' }
+        ];
+
+        // Complete 40 Flavors Categorized Data
+        const flavorCategoriesData = [
+            {
+                title: "1. الفواكه المنعشة والمشكلة (Fruity Mixes)",
+                description: "تشكيلة من الفواكه الطبيعية المشكلة والمنعشة.",
+                items: [
+                    { id: 'f1', name: 'Nasty Juice — Bad Blood', brand: 'Nasty Juice', desc: 'مزيج التوت الأسود (Blackcurrant) مع لمسة نعناع خفيفة.', price: 380, img: 'https://files.cdn-files-a.com/admin/system_photos_stock/800_696091da88166.jpg?format=avif' },
+                    { id: 'f2', name: 'Nasty Juice — Slow Blow', brand: 'Nasty Juice', desc: 'أناناس مع ليمونادة منعشة.', price: 380, img: 'https://files.cdn-files-a.com/admin/system_photos_stock/800_696091da88166.jpg?format=avif' },
+                    { id: 'f3', name: '7 Daze — Reds Apple', brand: '7 Daze', desc: 'طعم تفاح أحمر طازج وصافي.', price: 410, img: 'https://files.cdn-files-a.com/admin/system_photos_stock/800_695f639a88e6c.jpg?format=avif' },
+                    { id: 'f4', name: 'Reds Apple — Watermelon', brand: 'Reds Apple', desc: 'تفاح أحمر ممزوج مع البطيخ الأحمر.', price: 410, img: 'https://files.cdn-files-a.com/admin/system_photos_stock/800_695f639a88e6c.jpg?format=avif' },
+                    { id: 'f5', name: 'Vgod — Berry Bomb', brand: 'VGOD', desc: 'طعم التوت المشكل الحلو مع الحموضة المتوازنة.', price: 400, img: 'https://files.cdn-files-a.com/admin/system_photos_stock/800_695aa8920e622.jpg?format=avif' },
+                    { id: 'f6', name: 'Naked 100 — Lava Flow', brand: 'Naked 100', desc: 'مزيج استوائي من الفراولة، الأناناس، وجوز الهند.', price: 420, img: 'https://files.cdn-files-a.com/admin/system_photos_stock/800_69640329d9413.jpg?format=avif' },
+                    { id: 'f7', name: 'Naked 100 — Hawaiian Pog', brand: 'Naked 100', desc: 'ماراكوجا (Passion Fruit)، برتقال، وجوافة.', price: 420, img: 'https://files.cdn-files-a.com/admin/system_photos_stock/800_69640329d9413.jpg?format=avif' },
+                    { id: 'f8', name: 'Dinner Lady — Mango Ice', brand: 'Dinner Lady', desc: 'مانجو استوائية حلوة ومكثفة.', price: 390, img: 'https://files.cdn-files-a.com/admin/system_photos_stock/800_6962b518c4f37.jpg?format=avif' },
+                    { id: 'f9', name: 'Riot Squad — Blue Burst', brand: 'Riot Squad', desc: 'توت أزرق حامض حلو (Blue Raspberry).', price: 380, img: 'https://files.cdn-files-a.com/admin/system_photos_stock/800_6962b518c4f37.jpg?format=avif' },
+                    { id: 'f10', name: 'Pukka Juice — Blackcurrant', brand: 'Pukka Juice', desc: 'توت أسود غني بطعم حاد ومنعش.', price: 350, img: 'https://files.cdn-files-a.com/admin/system_photos_stock/800_696091da88166.jpg?format=avif' }
+                ]
+            },
+            {
+                title: "2. الفواكه المثلجة (Iced & Cool Fruits)",
+                description: "نكهات الفواكه مع التبريد والثلج المنعش.",
+                items: [
+                    { id: 'f11', name: 'Vgod — Mango Bomb Iced', brand: 'VGOD', desc: 'مانجو ناضجة مع إحساس ثلجي قوي (Ice).', price: 400, img: 'https://files.cdn-files-a.com/admin/system_photos_stock/800_695aa8920e622.jpg?format=avif' },
+                    { id: 'f12', name: 'Vgod — Purple Bomb Iced', brand: 'VGOD', desc: 'طعم عنب أحمر مثلج ومكثف.', price: 400, img: 'https://files.cdn-files-a.com/admin/system_photos_stock/800_695aa8920e622.jpg?format=avif' },
+                    { id: 'f13', name: 'Vgod — Apple Bomb Iced', brand: 'VGOD', desc: 'تفاح أخضر حامض مع انتعاش الثلج.', price: 400, img: 'https://files.cdn-files-a.com/admin/system_photos_stock/800_695aa8920e622.jpg?format=avif' },
+                    { id: 'f14', name: 'Nasty Juice — Cush Man Iced', brand: 'Nasty Juice', desc: 'المانجو الشهيرة من ناستي مع طبقة ثلج باردة.', price: 390, img: 'https://files.cdn-files-a.com/admin/system_photos_stock/800_696091da88166.jpg?format=avif' },
+                    { id: 'f15', name: 'Naked 100 — Crisp Menthol', brand: 'Naked 100', desc: 'منتول خالص وانتعاش شديد.', price: 420, img: 'https://files.cdn-files-a.com/admin/system_photos_stock/800_69640329d9413.jpg?format=avif' },
+                    { id: 'f16', name: '7 Daze — Reds Apple Grape Ice', brand: '7 Daze', desc: 'تفاح أحمر مع عنب وثلج.', price: 410, img: 'https://files.cdn-files-a.com/admin/system_photos_stock/800_695f639a88e6c.jpg?format=avif' },
+                    { id: 'f17', name: 'Ruthless — Grape Drank On Ice', brand: 'Ruthless', desc: 'طعم صودا العنب المثلجة.', price: 400, img: 'https://files.cdn-files-a.com/admin/system_photos_stock/800_6962b518c4f37.jpg?format=avif' },
+                    { id: 'f18', name: 'Ruthless — EZ Duz It On Ice', brand: 'Ruthless', desc: 'فراولة مع بطيخ وثلاثية من الانتعاش البارد.', price: 400, img: 'https://files.cdn-files-a.com/admin/system_photos_stock/800_6962b518c4f37.jpg?format=avif' },
+                    { id: 'f19', name: 'Dr. Vapes — Blue Panther Ice', brand: 'Dr. Vapes', desc: 'حلاوة التوت الأزرق المثلج.', price: 430, img: 'https://files.cdn-files-a.com/admin/system_photos_stock/800_6962b518c4f37.jpg?format=avif' },
+                    { id: 'f20', name: 'Sam\'s Vape — Frozen Mamba', brand: 'Sam\'s Vape', desc: 'مزيج فواكه استوائية مثلجة ومميزة.', price: 380, img: 'https://files.cdn-files-a.com/admin/system_photos_stock/800_696091da88166.jpg?format=avif' }
+                ]
+            },
+            {
+                title: "3. الحلويات، المخبوزات، والكريمات (Dessert & Bakery)",
+                description: "عشاق الكيك والكاسترد والبسكويت المخبوز.",
+                items: [
+                    { id: 'f21', name: 'Dinner Lady — Lemon Tart', brand: 'Dinner Lady', desc: 'تارت الليمون الشهير مع لمسة بسكويت وكريمة.', price: 390, img: 'https://files.cdn-files-a.com/admin/system_photos_stock/800_6962b518c4f37.jpg?format=avif' },
+                    { id: 'f22', name: 'Vapetasia — Killer Kustard', brand: 'Vapetasia', desc: 'كاسترد فانيليا غني وكريمي جداً.', price: 420, img: 'https://files.cdn-files-a.com/admin/system_photos_stock/800_69640329d9413.jpg?format=avif' },
+                    { id: 'f23', name: 'Vapetasia — Killer Kustard Blueberry', brand: 'Vapetasia', desc: 'كاسترد فانيليا مع توت أزرق.', price: 420, img: 'https://files.cdn-files-a.com/admin/system_photos_stock/800_69640329d9413.jpg?format=avif' },
+                    { id: 'f24', name: 'Kilo — Birthday Cake', brand: 'Kilo', desc: 'كيك أعياد الميلاد مع الفانيليا والكريمة.', price: 410, img: 'https://files.cdn-files-a.com/admin/system_photos_stock/800_6962b518c4f37.jpg?format=avif' },
+                    { id: 'f25', name: 'Ripe Vapes — VCT', brand: 'Ripe Vapes', desc: 'كاسترد فانيليا مع لمسة تبغ خفيفة (من أشهر النكهات عالمياً).', price: 450, img: 'https://files.cdn-files-a.com/admin/system_photos_stock/800_69640329d9413.jpg?format=avif' },
+                    { id: 'f26', name: 'Jam Monster — Strawberry Jam', brand: 'Jam Monster', desc: 'توست مدهون بالزبذة مع مربى الفراولة.', price: 430, img: 'https://files.cdn-files-a.com/admin/system_photos_stock/800_696091da88166.jpg?format=avif' },
+                    { id: 'f27', name: 'Jam Monster — Blueberry Jam', brand: 'Jam Monster', desc: 'توست بالزبذة ومربى التوت.', price: 430, img: 'https://files.cdn-files-a.com/admin/system_photos_stock/800_696091da88166.jpg?format=avif' },
+                    { id: 'f28', name: 'Sadboy — Butter Cookie', brand: 'Sadboy', desc: 'بسكويت الزبدة الدافي والحلويات الناعمة.', price: 410, img: 'https://files.cdn-files-a.com/admin/system_photos_stock/800_6962b518c4f37.jpg?format=avif' },
+                    { id: 'f29', name: 'Sadboy — Key Lime Cookie', brand: 'Sadboy', desc: 'بسكويت مع كريم الليمون الأخضر الحامض.', price: 410, img: 'https://files.cdn-files-a.com/admin/system_photos_stock/800_6962b518c4f37.jpg?format=avif' },
+                    { id: 'f30', name: 'Dr. Vapes — Black Panther', brand: 'Dr. Vapes', desc: 'آيس كريم فانيليا مع زبدة الهازلنت (البندق) ولمسة تبغ فاخر.', price: 440, img: 'https://files.cdn-files-a.com/admin/system_photos_stock/800_6962b518c4f37.jpg?format=avif' }
+                ]
+            },
+            {
+                title: "4. التبغ، القهوة، والمشروبات (Tobacco, Coffee & Drinks)",
+                description: "التبغ الفاخر، خلطات القهوة والكراميل.",
+                items: [
+                    { id: 'f31', name: 'Vgod — Cubano Silver', brand: 'VGOD', desc: 'تبغ كوبي فاخر مع فانيليا وكريم سبايسي.', price: 420, img: 'https://files.cdn-files-a.com/uploads/12502958/800_6add49e34535c.jpg?format=avif' },
+                    { id: 'f32', name: 'Vgod — Cubano Black', brand: 'VGOD', desc: 'تبغ كوبي قوي ومركز مع لمسة كاسترد.', price: 420, img: 'https://files.cdn-files-a.com/uploads/12502958/800_6add49e34535c.jpg?format=avif' },
+                    { id: 'f33', name: 'Vgod — Dry Tobacco', brand: 'VGOD', desc: 'طعم التبغ الخالص الجاف بدون حلاوة.', price: 400, img: 'https://files.cdn-files-a.com/uploads/12502958/800_6add49e34535c.jpg?format=avif' },
+                    { id: 'f34', name: 'Ripe Vapes — VCT Bold', brand: 'Ripe Vapes', desc: 'تبغ غني وقوي مع نكهة VCT الكلاسيكية.', price: 450, img: 'https://files.cdn-files-a.com/admin/system_photos_stock/800_69640329d9413.jpg?format=avif' },
+                    { id: 'f35', name: 'Ripe Vapes — VCT Chocolate', brand: 'Ripe Vapes', desc: 'كاسترد فانيليا وتبغ مع شوكولاتة داكنة.', price: 450, img: 'https://files.cdn-files-a.com/admin/system_photos_stock/800_69640329d9413.jpg?format=avif' },
+                    { id: 'f36', name: 'Dr. Vapes — Panther Series Gold', brand: 'Dr. Vapes', desc: 'ليتشي استوائي مع العسل والفواكه.', price: 430, img: 'https://files.cdn-files-a.com/admin/system_photos_stock/800_6962b518c4f37.jpg?format=avif' },
+                    { id: 'f37', name: 'Nasty Juice — Bronze Blend', brand: 'Nasty Juice', desc: 'تبغ مع كراميل وبتل الفانيليا.', price: 390, img: 'https://files.cdn-files-a.com/admin/system_photos_stock/800_696091da88166.jpg?format=avif' },
+                    { id: 'f38', name: 'Ruthless — Coffee Tobacco', brand: 'Ruthless', desc: 'مزيج القهوة الغامقة مع التبغ الفاخر.', price: 410, img: 'https://files.cdn-files-a.com/admin/system_photos_stock/800_6962b518c4f37.jpg?format=avif' },
+                    { id: 'f39', name: 'Riot Squad — Salted Caramel', brand: 'Riot Squad', desc: 'كراميل مملح ناعم ومشروب دافئ.', price: 390, img: 'https://files.cdn-files-a.com/admin/system_photos_stock/800_6962b518c4f37.jpg?format=avif' },
+                    { id: 'f40', name: 'Monster Vape Labs — Caramel Tobacco', brand: 'Monster Vape Labs', desc: 'تبغ كلاسيكي مع كراميل غني.', price: 420, img: 'https://files.cdn-files-a.com/admin/system_photos_stock/800_696091da88166.jpg?format=avif' }
+                ]
+            }
+        ];
+
+        let cart = [];
+
+        // App Initialization
+        window.onload = function() {
+            renderDevices('all');
+            renderFlavors();
+            updateCartUI();
+        };
+
+        // Render Devices Grid
+        function renderDevices(categoryFilter) {
+            const container = document.getElementById('deviceGrid');
+            container.innerHTML = '';
+
+            const filtered = categoryFilter === 'all' 
+                ? productsData 
+                : productsData.filter(p => p.category === categoryFilter);
+
+            filtered.forEach(p => {
+                const cardHtml = `
+                    <article class="cv-card flex flex-col overflow-hidden">
+                        <img alt="${p.name}" class="aspect-square sm:aspect-video w-full object-cover" src="${p.img}" onerror="this.src='https://placehold.co/400x300/1a062e/bc13fe?text=Captain+Vape'">
+                        <div class="flex flex-1 flex-col p-3 sm:p-4">
+                            <span class="text-[0.65rem] sm:text-xs font-black text-[var(--accent-color)]">${p.brand}</span>
+                            <h3 class="mt-1 text-xs sm:text-sm font-bold text-white line-clamp-1">${p.name}</h3>
+                            <p class="mt-1 flex-1 text-[0.65rem] sm:text-xs leading-snug text-[var(--text-muted)] line-clamp-2">${p.desc}</p>
+                            <div class="mt-3 flex items-center justify-between border-t border-[var(--border-color)] pt-2">
+                                <span class="text-xs sm:text-sm font-black text-[var(--accent-color)]">${p.price} ج.م</span>
+                                <span class="text-[0.6rem] font-bold text-emerald-400">متوفر</span>
+                            </div>
+                            <button onclick="addToCart('${p.id}', 'device')" type="button" class="cv-btn-primary mt-2.5 w-full text-[0.7rem] sm:text-xs py-1.5 sm:py-2">
+                                <i class="fa-solid fa-cart-plus"></i> أضف للطلب
+                            </button>
+                        </div>
+                    </article>
+                `;
+                container.insertAdjacentHTML('beforeend', cardHtml);
+            });
+        }
+
+        // Filter Category Tabs
+        function filterCategory(cat, btn) {
+            document.querySelectorAll('#deviceCategoryTabs .cv-tab').forEach(t => t.classList.remove('is-active'));
+            btn.classList.add('is-active');
+            renderDevices(cat);
+        }
+
+        // Render Categorized Flavors
+        function renderFlavors() {
+            const container = document.getElementById('flavorSections');
+            container.innerHTML = '';
+
+            flavorCategoriesData.forEach(cat => {
+                let itemsHtml = '';
+                cat.items.forEach(f => {
+                    itemsHtml += `
+                        <article class="cv-card flex flex-col overflow-hidden">
+                            <img alt="${f.name}" class="aspect-square sm:aspect-video w-full object-cover" src="${f.img}" onerror="this.src='https://placehold.co/400x300/1a062e/ff007f?text=Flavor'">
+                            <div class="flex flex-1 flex-col p-3 sm:p-4">
+                                <span class="text-[0.65rem] sm:text-xs font-black text-[var(--accent-color)]">${f.brand}</span>
+                                <h4 class="mt-1 text-xs sm:text-sm font-bold text-white line-clamp-1">${f.name}</h4>
+                                <p class="mt-1 flex-1 text-[0.65rem] sm:text-xs leading-snug text-[var(--text-muted)] line-clamp-2">${f.desc}</p>
+                                <div class="mt-3 flex items-center justify-between border-t border-[var(--border-color)] pt-2">
+                                    <span class="text-xs sm:text-sm font-black text-[var(--accent-color)]">${f.price} ج.م</span>
+                                </div>
+                                <button onclick="addFlavorToCart('${f.id}')" class="cv-btn-ghost mt-2.5 w-full text-[0.7rem] sm:text-xs py-1.5 sm:py-2">
+                                    <i class="fa-solid fa-plus"></i> إضافة هذه النكهة
+                                </button>
+                            </div>
+                        </article>
+                    `;
+                });
+
+                const sectionHtml = `
+                    <div>
+                        <div class="border-b border-[var(--border-color)] pb-2 mb-4">
+                            <h3 class="text-base sm:text-xl font-black text-white">${cat.title}</h3>
+                            <p class="text-[0.65rem] sm:text-xs text-[var(--text-muted)]">${cat.description}</p>
+                        </div>
+                        <div class="grid gap-4 grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                            ${itemsHtml}
+                        </div>
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforeend', sectionHtml);
+            });
+        }
+
+        // Add Product to Cart
+        function addToCart(id) {
+            const item = productsData.find(p => p.id === id);
+            if (!item) return;
+
+            const existing = cart.find(c => c.id === id);
+            if (existing) {
+                existing.qty++;
+            } else {
+                cart.push({ ...item, qty: 1 });
+            }
+            updateCartUI();
+            toggleCartModal(true);
+        }
+
+        // Add Flavor to Cart
+        function addFlavorToCart(id) {
+            let foundFlavor = null;
+            flavorCategoriesData.forEach(cat => {
+                const match = cat.items.find(i => i.id === id);
+                if (match) foundFlavor = match;
+            });
+
+            if (!foundFlavor) return;
+
+            const existing = cart.find(c => c.id === id);
+            if (existing) {
+                existing.qty++;
+            } else {
+                cart.push({ ...foundFlavor, qty: 1 });
+            }
+            updateCartUI();
+            toggleCartModal(true);
+        }
+
+        // Update Cart UI
+        function updateCartUI() {
+            const badge = document.getElementById('cartBadge');
+            const container = document.getElementById('cartItemsContainer');
+            const totalElem = document.getElementById('cartTotalPrice');
+
+            const totalCount = cart.reduce((sum, i) => sum + i.qty, 0);
+            badge.innerText = totalCount;
+
+            if (cart.length === 0) {
+                container.innerHTML = '<p class="text-center text-xs text-gray-400 py-6">سلة الطلبات فارغة حالياً</p>';
+                totalElem.innerText = '0 ج.م';
+                return;
+            }
+
+            container.innerHTML = '';
+            let total = 0;
+
+            cart.forEach(item => {
+                const itemTotal = item.price * item.qty;
+                total += itemTotal;
+
+                container.insertAdjacentHTML('beforeend', `
+                    <div class="flex items-center justify-between pt-2.5 text-xs">
+                        <div>
+                            <p class="font-bold text-white text-xs sm:text-sm">${item.name}</p>
+                            <p class="text-gray-400 text-[0.65rem] sm:text-xs">${item.price} ج.م × ${item.qty}</p>
+                        </div>
+                        <div class="flex items-center gap-1.5">
+                            <button onclick="changeQty('${item.id}', -1)" class="w-5 h-5 rounded bg-[var(--surface-color)] text-white border border-[var(--border-color)] font-bold text-xs">-</button>
+                            <span class="font-bold text-white text-xs px-1">${item.qty}</span>
+                            <button onclick="changeQty('${item.id}', 1)" class="w-5 h-5 rounded bg-[var(--surface-color)] text-white border border-[var(--border-color)] font-bold text-xs">+</button>
+                            <button onclick="removeItem('${item.id}')" class="text-red-400 hover:text-red-300 mr-1"><i class="fa-solid fa-trash text-xs"></i></button>
+                        </div>
+                    </div>
+                `);
+            });
+
+            totalElem.innerText = total + ' ج.م';
+        }
+
+        function changeQty(id, delta) {
+            const item = cart.find(c => c.id === id);
+            if (!item) return;
+            item.qty += delta;
+            if (item.qty <= 0) {
+                cart = cart.filter(c => c.id !== id);
+            }
+            updateCartUI();
+        }
+
+        function removeItem(id) {
+            cart = cart.filter(c => c.id !== id);
+            updateCartUI();
+        }
+
+        // Toggle Cart Modal
+        function toggleCartModal(forceOpen = false) {
+            const modal = document.getElementById('cartModal');
+            if (forceOpen) {
+                modal.classList.remove('hidden');
+            } else {
+                modal.classList.toggle('hidden');
+            }
+        }
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+        }
+
+        // Payment Method Toggle
+        function toggleInstaPayInfo(show) {
+            const info = document.getElementById('instapayDetails');
+            if (show) info.classList.remove('hidden');
+            else info.classList.add('hidden');
+        }
+
+        // Handle Checkout Form Submission via WhatsApp
+        function handleCheckout(e) {
+            e.preventDefault();
+            if (cart.length === 0) {
+                alert('سلة الطلبات فارغة!');
+                return;
+            }
+
+            const name = document.getElementById('custName').value;
+            const phone = document.getElementById('custPhone').value;
+            const address = document.getElementById('custAddress').value;
+            const payMethod = document.querySelector('input[name="paymentMethod"]:checked').value === 'instapay' ? 'إنستا باي (InstaPay)' : 'الدفع عند الاستلام';
+
+            let msg = `*طلب جديد من متجر Captain Vape الإسكندرية*\n\n`;
+            msg += `*الاسم:* ${name}\n`;
+            msg += `*الهاتف:* ${phone}\n`;
+            msg += `*العنوان:* ${address}\n`;
+            msg += `*طريقة الدفع:* ${payMethod}\n\n`;
+            msg += `*المنتجات المطلوبة:*\n`;
+
+            let total = 0;
+            cart.forEach(i => {
+                msg += `- ${i.name} (العدد: ${i.qty}) - السعر: ${i.price * i.qty} ج.م\n`;
+                total += i.price * i.qty;
+            });
+
+            msg += `\n*الإجمالي الكلي:* ${total} ج.م`;
+
+            const encodedMsg = encodeURIComponent(msg);
+            window.open(`https://wa.me/201200000000?text=${encodedMsg}`, '_blank');
+        }
+    </script>
+</body>
+</html>
